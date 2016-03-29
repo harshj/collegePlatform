@@ -1,0 +1,7 @@
+gitignore
+*.pyc
+./__pycache__/*
+./migration/*
+./__init__.py
+./settings.py
+./wsgi.py
