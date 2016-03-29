@@ -1,0 +1,44 @@
+{% load humanize %} 
+{% block title %}<h2>Welcome {{uname}}</h2><br>{% endblock %}
+<b>{{u}}</b>
+<p><img src="{{MEDIA_URL}}/{{pic}}" width="200" height="200"/>
+<form action = "{% url 'editprofileredirect' id1=u.id%}" method='POST'>
+{% csrf_token %}
+<button type="submit" id="login-btn" name="login">EDIT YOUR PROFILE</button>
+{% block content %} 
+</form>
+<ul>
+    {% if newsi|length  %}
+        {% for q in newsi %}
+     {% ifequal q.by u %}
+    <li>  
+        <b><h2>{{q.title}}<a href="{%url 'moredetail' id1=uid id2=q.id%}">Read in detail</a></h2></b><br>
+            <h3>By:{{q.by}}   Total Number of likes:{{q.likes}}</h3>
+            <h3>Days Since last Modified:{{q.date_modified|naturaltime}}</h3>
+<form action="{% url 'modifynews' id1=uid id2=q.id %}" method="POST">
+    {% csrf_token %}
+<button type="submit" id="login-btn" name="login">MODIFY NEWS</button>
+</form>
+     <form action="{% url 'deletenews' id1=uid id2=q.id %}" method="POST">
+{% csrf_token %}
+         <button type="submit" id="login-btn" name="login">DELETE NEWS</button>
+</form>   
+        </li>
+    {% else %}
+    <li> 
+    <b><h2>{{q.title}}<a href="{%url 'moredetail' id1=uid id2=q.id%}">Read in detail</a></h2></b><br>
+            <h3>By:{{q.by}}   Total Number of likes:{{q.likes}}</h3>
+    <h3>Days Since last Modified:{{q.date_modified|naturaltime}}</h3>
+    {% endifequal %}
+        {% endfor %}
+    {% else %}
+     Nothing to display
+    </li>
+</ul>
+        {% endif %}
+<form action = "{% url 'profile' id=uid %}" method='POST'>
+{% csrf_token %}
+    {{f.as_p}}
+<button type="submit" id="login-btn" name="login">POST IMPORTANT NEWS</button>
+</form>
+{% endblock %}

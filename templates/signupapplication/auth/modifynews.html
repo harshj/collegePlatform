@@ -1,0 +1,7 @@
+{% block content %}
+<form action = "{% url 'modifynews' id1=id1 id2=id2 %}" method='POST'>
+{% csrf_token %}
+    {{f.as_p}}
+<button type="submit" id="login-btn" name="login">MODIFY NEWS</button>
+</form>
+{% endblock %}

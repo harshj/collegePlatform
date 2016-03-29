@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Login{% endblock %}
+{% block content %}
+{% include 'signupapplication/auth/base1.html'%}
+<div class="row">
+    <div class="col-xs-3 pull-right">
+<h4>Login</h4>
+        <form class="form" action = "{% url 'login' %}" method='POST'>
+		{% csrf_token %}
+        {{f|crispy}}
+<!--<button type="submit" id="login-btn" name="login">Log In</button>-->
+<input class='btn btn-primary' type='submit' value='LogIn'/>
+</form>
+    </div>
+    <div class='col-xs-3'>
+        <p class='lead'>eu pede mollis pretium</p>
+    </div>
+    <div class='col-xs-3'>
+        <p class='lead'>eu pede mollis pretium</p>
+    </div>
+    <div class='col-xs-3'>
+        <p class='lead'>eu pede mollis pretium</p>
+    </div>
+</div>
+{% endblock %}

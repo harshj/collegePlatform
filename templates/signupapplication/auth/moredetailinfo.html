@@ -1,0 +1,48 @@
+{% load humanize %} 
+{% block title %}<h2>Here are all the details {{uname}}</h2><br>{% endblock %}
+{% block content %} 
+{% ifequal indicate 0 %}
+<form action="{% url 'bookmark'  id2=i.id %}" method='POST'>
+    {% csrf_token %}
+    {{fprime.as_p}}
+    <button type="submit" id="login-btn2" name="login3"><B>BOOKMARK AND RATE THIS NEWS OUT OF 5</B></button>  
+</form>
+{% else %}
+<form action="{% url 'unbookmark' id1=uid id2=i.id %}" method='POST'>
+{% csrf_token %}
+    <button type="submit" id="login-btn3" name="login4"><I>REMOVE IT FROM BOOKMARK LIST</I></button>
+<p>
+    </form>
+{% endifequal %}
+<b><i>{{i.description}}</i></b>
+{% if u in likerlist %}
+        <form action="{% url 'unlike'  id2=i.id %}" method='POST'>
+                {% csrf_token %}
+              
+            <button type="submit" id="login-btn1" name="login1">UNLIKE</button>  
+        </form>
+    {% else %}
+        <form action="{% url 'like' id1=uid id2=i.id %}" method='POST'>
+                {% csrf_token %}
+              
+            <button type="submit" id="login-btn2" name="login2">LIKE</button>  
+        </form>
+    {% endif %}
+<ul>
+    {% for c in co %}
+    <li>  
+        {{c.person}}<p><img src="{{MEDIA_URL}}/{{c.person.image}}" width="50" height="50"/>comments{{c.comment}}at{{c.date_modified|naturaltime}}
+        <br>
+    </li>
+    {% endfor %}
+</ul>
+     
+        <form action = "{% url 'moredetail' id1=uid id2=i.id %}" method='POST'>
+            {% csrf_token %}
+            {{f.as_p}}
+            <button type="submit" id="login-btn" name="login">POST A COMMENT</button>
+        </form>
+    {% endblock %} {{i.likes}} Likes
+                    {{i.seens}} Seens
+
+

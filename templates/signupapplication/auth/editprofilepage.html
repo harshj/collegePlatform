@@ -1,0 +1,9 @@
+{% block title %}NOW HERE YOU EDIT YOUR PROFILE PLEASE{% endblock %}
+{% block content %}
+<h4> EDIT PROFILE </h4>
+	<form enctype="multipart/form-data" action= "{% url 'editprofile' %}" method='POST'>
+		{% csrf_token %}
+        {{f.as_p}}
+<button type="submit" id="sign-btn" name="sign">EDIT PROFILE</button>
+</form>
+{% endblock %}
